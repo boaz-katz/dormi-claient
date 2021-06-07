@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+</body>
+<div id="contentwrapper">
+    <div class="main_content"> 
+    <div class="container">
+
+  <div class="row">  
+    
+          <div class="col-sm-6">
+            <form action="" role="form" class="form-horizontal">
+              <div class="form-group">
+                <div class="col-lg-8">
+                  <input type="text" placeholder="Email/Cellphone" id="email" class="form-control">
+                </div>
+              </div>
+              <div class="form-group" id="password">
+                <div class="col-lg-8">
+                  <input type="password" placeholder="Password" id="entry" class="form-control">
+                </div>
+              </div>
+              <div class="form-group" id="captcha">
+                <div class="col-lg-8">
+                 	<div class="g-recaptcha" data-sitekey="6Le53YUUAAAAAJKGLOaT9e6bPz_hjVt9pWbcXIla"></div>
+					<input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" value="03AGdBq27a6zzs7ZDzdWfQxqPm5JB5zooLNhuJMOtHL_Z-y_FOl-WpHz9-u2JfjKQYZIuozP57agCgNMpI2-Bulvl5PIZQhQVrawBw2NGaA6IY1__oNeAIhyz0253wf38aCRbAvbfVKAuBoPiHiThCe4Y3SswqI7bORgXqMXL5nn5btDFadVePvA6JKCho5kKrYPjWjOHKQS6EeIKa5dlDph1XHGelbORhgJZbBsmVXPWkWfuonjz2oBY1Y1G45IO2uSquyW6lO6G_v1bmMpJsR4QHS6aGz-7ZjFpGKXqccealWRpPCxGIcyN5Bi7I4NOLY2-bC6GJmZTmTriz08_9UfECNAav6Mghr32upyBQ8hmTJ6vwrhHUdEJukmLhCIa47XniLZRYhIhZ1QrAY2YE8hd78KIAADtM4x0YgQ4ySTQ5cLLauR_bWjxTFSPiQuHeZ1eNcxZ0Sfnf">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class=" col-lg-12">
+                  <input type="submit" id="submitter" class=" btn btn-primary" value="Login"> <a href="javascript:;" id="triggerReminder" class="btn">Password reminder</a>
+                </div>
+                <div class="col-lg-12">
+                  <div id="LoginMessage"> </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-6 d-none d-lg-block">
+			  
+			    <div class="row bg-info p-2">
+					<div class="col-4" id="manbg">
+						<img src="/img/ui/manHead.png" id="smallmanbg" style="display: inline;">
+				  </div>
+					<div class="col-8 text-white p-2 text-right">
+				<h3 dir="rtl" style="font-weight: bold;">אין לכם עדיין חשבון בדורמי?</h3>
+				<h5 dir="rtl" style="font-weight: bold;">	 <a href="/" class="text-white" style="text-decoration: underline;">תלמדו איך עובדים עם ניהול אחזקה חכם</a></h5>
+					</div>
+			  
+			   </div>
+			<div class="p-2 text-center">
+          <h4 dir="rtl">מעדיפים להיכנס עם מכשיר נייד? סרקו את הקוד:</h4>
+          <p><img src="https://chart.apis.google.com/chart?chf=bg,s,FFFFFF&amp;chs=380x380&amp;cht=qr&amp;chld=|1&amp;chl=https://www.dormi.co.il/users" alt="Login from your smartphone" style="max-width: 100%; height: auto;"></p></div>
+          </div>
+ 
+  </div>
+
+		
+<div class="modal ui-frontfade" id="ModalPassreminder">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <h3 class="modal-title">Password reminder</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body"> 
+          
+			<div id="reminderResponse"></div>
+			<div class="form-group">
+                <div class="col-lg-8">
+                  <input type="text" placeholder="Email" name="emailReminder" id="emailReminder" class="form-control"><!--/Cellphone-->
+				  <button type="button" class="btn btn-primary" id="triggerSendReminder">Send</button>
+                </div>
+              </div>
+				
+
+		  </div>
+    </div>
+  </div>
+</div>		
+
+ 
+
+		</div> 
+    </div>
+  </div>
+</html>
