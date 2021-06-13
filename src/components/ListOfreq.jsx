@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Modal, Tag, Form, Menu, Dropdown, Card, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+
 import Button from "react-bootstrap/Button";
 import {
   Contener,
   StyeldSelect,
   StyeldTag,
+  StyelsCard,
 } from "../styelscomponents/styeldListReq";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { ImCloudDownload } from "react-icons/im";
@@ -26,9 +29,23 @@ const tailLayout = {
     span: 16,
   },
 };
+const menu = (
+  <Menu>
+    <Menu.Item>סגירה מהירה</Menu.Item>
+    <Menu.Item>סמן כטיפול בפנייה</Menu.Item>
+    <Menu.Item>שלח הודעה</Menu.Item>
+    <Menu.Item>הפנה לאיש צוות</Menu.Item>
+    <Menu.Item>סמן כפנייה חדשה</Menu.Item>
+    <Menu.Item>סגירה מתקדמת</Menu.Item>
+    <Menu.Item>עריכה</Menu.Item>
+    <Menu.Item>מחיקה</Menu.Item>
+  </Menu>
+);
+const Checkform = (props) => {
+  document.body.style.backgroundColor = "white";
 
-const Checkform = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const Repeatedtask = props.Repeatedtask;
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -53,6 +70,7 @@ const Checkform = () => {
       problom: "סתימה",
       location: "כיתה5",
       status: 2,
+      Repeatedtask: "כל שלושה חודשים",
     },
     {
       id: 9995,
@@ -64,6 +82,7 @@ const Checkform = () => {
       problom: "סתימה",
       location: "כיתה5",
       status: 1,
+      Repeatedtask: "כל שלושה חודשים",
     },
     {
       id: 9994,
@@ -75,6 +94,7 @@ const Checkform = () => {
       problom: "סתימה",
       location: "כיתה5",
       status: 1,
+      Repeatedtask: "כל שלושה חודשים",
     },
   ];
   const [fackearry, setfackearry] = useState(fackearry1);
@@ -108,6 +128,16 @@ const Checkform = () => {
         <span className="export_exel">
           <ImCloudDownload />
         </span>
+        {Repeatedtask ? (
+          <button>
+            {" "}
+            <Link style={{ color: "#FFF" }} to="/temmembertask">
+              {" "}
+              פתח פנייה חדשה{" "}
+            </Link>
+          </button>
+        ) : null}
+        <span className="text">רשימת פניות</span>
         <span
           onClick={() => {
             setfilter(!filter);
@@ -195,9 +225,13 @@ const Checkform = () => {
 
             return (
               <div>
-                <Card
+                <StyelsCard
                   title={`${el.type} / ${el.problom}`}
-                  extra={
+                  primary={urgency}
+                  actions={[
+                    <Dropdown overlay={menu} className="dotsDropdown">
+                      <HiOutlineDotsHorizontal />
+                    </Dropdown>,
                     <StyeldSelect
                       primary={urgency}
                       defaultValue={urgencytext}
@@ -217,24 +251,25 @@ const Checkform = () => {
                         {" "}
                         <Tag color="red">גבוה</Tag>
                       </Option>
-                    </StyeldSelect>
-                  }
+                    </StyeldSelect>,
+                  ]}
                   style={{ width: "300px" }}
+                  extra={<div>מיקום: {el.location}</div>}
                 >
                   <span> {el.id}</span> <span> {el.date}</span>
                   <span>
-                    {" "}
-                    {el.incharge}
-                    {el.phonenumber}
-                  </span>
-                  <span> {el.location}</span>
-                  <span> {el.status}</span>
-                  <span>
-                    {" "}
-                    <Tag color={status}>{statustext}</Tag>
-                  </span>
-                  <span></span>
-                </Card>
+                    {el.incharge} {el.phonenumber}
+                  </span>{" "}
+                  <span> {el.status}</span>{" "}
+                  {Repeatedtask ? (
+                    <span>{el.Repeatedtask}</span>
+                  ) : (
+                    <span>
+                      {" "}
+                      <Tag color={status}>{statustext}</Tag>
+                    </span>
+                  )}
+                </StyelsCard>
 
                 <Modal
                   title="עדכן את רמת הדחיפות"
