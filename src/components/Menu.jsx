@@ -12,10 +12,10 @@ import { VscAccount } from "react-icons/vsc";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 const { SubMenu } = Menu;
-const HaderMenu = () => {
+const HaderMenu = (props) => {
   let history = useHistory();
   const [current, setcurrent] = useState(`mail`);
-
+  let status = props.LoginScreen;
   const handleClick = (e) => {
     setcurrent(e.key);
   };
@@ -32,85 +32,81 @@ const HaderMenu = () => {
   let data = { chors: 10 };
   return (
     <Contyner>
-      <Menu
-        onClick={handleClick}
-        selectedKeys={current}
-        mode="horizontal"
-        triggerSubMenuAction="click"
-      >
-        <SubMenu key="sub1-2" title="תפריט">
-          <Menu.Item key="5">טפסים</Menu.Item>
-          <Menu.Item key="6">טפסים שנשלחו</Menu.Item>
-        </SubMenu>
+      {status ? (
+        <Menu
+          onClick={handleClick}
+          selectedKeys={current}
+          mode="horizontal"
+          triggerSubMenuAction="click"
+        >
+          <Menu.Item key="new_complain">
+            <img
+              src="/images/logo_dormi.png"
+              alt="Image"
+              className="imagelogo"
+            />
+          </Menu.Item>
+        </Menu>
+      ) : (
+        <Menu
+          onClick={handleClick}
+          selectedKeys={current}
+          mode="horizontal"
+          triggerSubMenuAction="click"
+        >
+          <Menu.Item key="new_complain">
+            <img
+              src="/images/logo_dormi.png"
+              alt="Image"
+              className="imagelogo"
+            />
+          </Menu.Item>
+          <SubMenu key="sub1-2" title="תפריט">
+            <Menu.Item key="5">תפריט</Menu.Item>
+            <Menu.Item key="6">טפסים שנשלחו</Menu.Item>
+          </SubMenu>
 
-        <Menu.Item key="new_complain">
-          <Link to="/"> פתיחת פנייה חדשה</Link>
-        </Menu.Item>
-        <Menu.Item key="Repeatedtask">
-          <Link to="/Repeatedtask">מטלות מתוזמנות </Link>
-        </Menu.Item>
-        <Menu.Item key="new_chors">
-          <Link to="/ListOfreq">
-            {" "}
-            <Badge dir="tlr" count={data.chors}>
-              רשימת פניות
-            </Badge>
-          </Link>
-        </Menu.Item>
-        <SubMenu key="sub1-3" title="הגדרות">
-          <Menu.Item key="5">
-            <Link to="list_users">משתמשים </Link>
+          <Menu.Item key="new_complain">
+            <Link to="/"> פתיחת פנייה חדשה</Link>
           </Menu.Item>
-          <Menu.Item key="6">
-            {" "}
-            <Link to="location">מיקום </Link>
+          <Menu.Item key="Repeatedtask">
+            <Link to="/Repeatedtask">מטלות מתוזמנות </Link>
           </Menu.Item>
-          <Menu.Item key="7">
-            <Link to="categoris">קטגוריות </Link>
+          <Menu.Item key="new_chors">
+            <Link to="/ListOfreq">
+              {" "}
+              <Badge dir="tlr" count={data.chors}>
+                רשימת פניות
+              </Badge>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="8">
-            <Link to="setings">הגדרות</Link>
-          </Menu.Item>
-        </SubMenu>
-        <Menu.Item key="statisic">סטטיסטיקות</Menu.Item>
+          <SubMenu key="sub1-3" title="הגדרות">
+            <Menu.Item key="5">
+              <Link to="list_users">משתמשים </Link>
+            </Menu.Item>
+            <Menu.Item key="6">
+              {" "}
+              <Link to="location">מיקום </Link>
+            </Menu.Item>
+            <Menu.Item key="7">
+              <Link to="categoris">קטגוריות </Link>
+            </Menu.Item>
+            <Menu.Item key="8">
+              <Link to="setings">הגדרות</Link>
+            </Menu.Item>
+          </SubMenu>
+          <Menu.Item key="statisic">סטטיסטיקות</Menu.Item>
 
-        <SubMenu key="sub1-4" icon={<VscAccount />}>
-          <Menu.Item key="5">
-            {" "}
-            <Link to="/Users"> הפרופיל שלי</Link>
-          </Menu.Item>
-          <Menu.Item key="6">יציאה</Menu.Item>
-        </SubMenu>
-      </Menu>
+          <SubMenu key="sub1-4" icon={<VscAccount />}>
+            <Menu.Item key="5">
+              {" "}
+              <Link to="/Users"> הפרופיל שלי</Link>
+            </Menu.Item>
+            <Menu.Item key="6">יציאה</Menu.Item>
+          </SubMenu>
+        </Menu>
+      )}
     </Contyner>
-
-    /* <div>
-<span>  */
-    /* 
-<Select placeholder="תפריט" style={{ width: 120 }} onChange={handleChange}>
-    {fackearry?fackearry.map((el)=>(<Option   dir={"rtl"}value={[el.type,el.id]}>{el.type}</Option>
-
-
-    )):null}
-   
-      </Select>
-
-
-</span>
-{" "}
-<span>פתח פניה חדשה</span>
-{" "}
-<span>רשימת פניות</span>
-{" "}
-<span>מטלות מתוזמנות</span>
-{" "}
-<span>הגדרות</span>
-{" "}
-<span>סטטיסטיקות</span>
-{" "}   
-
-
-</div> */
   );
 };
 

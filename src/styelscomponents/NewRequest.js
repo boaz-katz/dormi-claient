@@ -1,6 +1,55 @@
 import styled from "styled-components";
 import { Form, Select, Checkbox, Input, Modal, Button } from "antd";
+export const Problemcontener = styled.div`
+  color: white;
+  display: flex;
+  text-align: start;
+  #hadep {
+    font-size: 31px;
+  }
+  .icondisply {
+    /* position: absolute; */
+    margin-top: 20px;
+  }
+  .listofproblom {
+    display: flex;
 
+    flex-wrap: wrap;
+  }
+  .avatar {
+    margin-top: 35px;
+  }
+  .uniqueproblem:hover {
+    color: black;
+  }
+  .uniqueproblem {
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-size: 11px;
+    height: 90px;
+    line-height: 6px;
+
+    padding: 30px;
+    width: 90px;
+    text-align: center;
+    margin: 7px;
+  }
+  @media only screen and (max-width: 600px) {
+    .icondisply {
+      position: absolute;
+      margin-top: 20px;
+      padding-inline-start: 38px;
+    }
+    .avatar {
+      margin-top: 35px;
+
+      width: 175px;
+      height: 500px;
+      position: relative;
+      right: 20%;
+    }
+  }
+`;
 export const FormContener = styled.div`
   display: flex;
   justify-content: start;
@@ -111,7 +160,6 @@ export const FormContener = styled.div`
   @media only screen and (min-width: 600px) {
     margin-top: 10%;
     .avatar {
-      background-color: red;
       width: 175px;
       height: 500px;
       margin-inline-start: 17%;
@@ -172,7 +220,7 @@ export const FormContener = styled.div`
     }
 
     .avatar {
-      background-color: gray;
+      /* background-color: gray; */
       width: 175px;
       height: 500px;
       position: relative;

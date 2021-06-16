@@ -1,11 +1,32 @@
 import styled from "styled-components";
+import { Form, Select, Checkbox, Input, Modal, Button } from "antd";
 
 export const Contener = styled.div`
-  p {
-    margin-inline-start: 10%;
-    text-align: start;
+  display: flex;
+  text-align: start;
+  margin: 82px;
+  .info {
+    margin-inline-start: 40px;
   }
-  .ant-form {
+  .qrcode {
+    margin-inline-start: 146px;
+    margin-top: 34px;
+  }
+  .passbutoon {
+    background-color: white;
+    height: 32px;
+    border: none;
+    margin-inline-start: 10%;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  }
+  .avatar {
+    width: 100px;
+  }
+  .bg-info {
+    display: flex;
+    background-color: blue;
+    justify-content: space-between;
+    text-align: start;
   }
 
   .ant-form-item-label > label {
@@ -19,6 +40,12 @@ export const Contener = styled.div`
     width: 215px;
   }
   @media only screen and (max-width: 600px) {
+    .bg-qr {
+      display: none;
+    }
+    .bg-info {
+      display: none;
+    }
     .ant-form-item-label > label {
       position: static;
       width: 332px;

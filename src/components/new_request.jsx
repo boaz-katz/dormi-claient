@@ -1,4 +1,5 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import DataContext from "../DataContext";
 
 import { Link } from "react-router-dom";
 
@@ -13,10 +14,11 @@ import {
   Select,
   Upload,
 } from "antd";
-import { FormContener } from "../styelscomponents/NewRequest";
+import { FormContener, Problemcontener } from "../styelscomponents/NewRequest";
 import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
 import { PoweroffOutlined } from "@ant-design/icons";
+import { GettfromServer, PostToServer } from "../serveses";
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -30,13 +32,30 @@ const Nwerequest = (props) => {
   const { Option } = Select;
   const { TextArea } = Input;
   const Temmembertask = props.Temmembertask;
+  const data = useContext(DataContext);
+  const changdata = useContext(DataContext).changdata;
   const [uplodeimagescreen, setuplodeimagescreen] = useState(false);
 
   const [typeofreq, settypeofreq] = useState();
   const [typs, settyps] = useState(true);
+
+  useEffect(async () => {
+    let res = await GettfromServer();
+
+    console.log("newreqget", res);
+  }, []);
+
+  const [selectromm, setselectromm] = useState(false);
+  const onChange = () => {
+    setselectromm(true);
+  };
+
   const listtips = [
     { type: "חשמל", id: 123 },
     { type: "אינסטלציה", id: 456 },
+    { type: "שקר3", id: 789 },
+    { type: "שקר2", id: 1011 },
+    { type: "שקר1", id: 1213 },
   ];
   const problomtypearry = [
     { type: "חשמל", id: 123 },
@@ -47,19 +66,36 @@ const Nwerequest = (props) => {
     { type: "פנימייה", id: 456 },
   ];
 
-  const onFinish = (values) => {
+  // changdata({ userid: "12345" });
+  const onFinish = (value) => {
+    debugger;
     enterLoading(2);
 
+    let userid = data?.data?.userid;
+    let locationid = value.locationid[1];
+    let roomid = value.roomid[1];
+    let subcategoryid = value.subcategoryid[1];
+    let urgencyid = value.urgencyid;
+    let comments = value.comments;
+
+    let obj = {
+      userid,
+      locationid,
+      roomid,
+      subcategoryid,
+      urgencyid,
+      comments,
+      ...typeofreq,
+    };
+    console.log("Success:", obj);
     setTimeout(() => {
       setuplodeimagescreen(true);
     }, 3000);
-
-    console.log("Success:", values);
   };
 
   const chosentyp = (value) => {
     settyps(false);
-    settypeofreq({ problem_id: value.type });
+    settypeofreq({ maincategory: value.type });
   };
 
   const [loadings, setloadings] = useState([]);
@@ -72,25 +108,7 @@ const Nwerequest = (props) => {
     });
   };
 
-  // const handleChange = async (e) => {
-  //   let myPromise = await new Promise((resolve, reject) => {
-  //     resolve({ file: e.target.files[0] });
-  //   });
-  //   onFormSubmit(myPromise);
-  // };
-
-  const onFormSubmit = (value) => {
-    // e.preventDefault();
-
-    console.log("imag", value);
-    const formData = new FormData();
-    formData.append("file", value.file);
-    // formData.append("phonenumber", phonenumber);
-    // formData.append("s3path", `${phonenumber}/`);
-  };
-  const sendimage = () => {
-    console.log("state", uplodeimage);
-  };
+  // seng imge
   const [uplodeimage, setuplodeimage] = useState({
     previewVisible: false,
     previewImage: "",
@@ -123,31 +141,62 @@ const Nwerequest = (props) => {
     </div>
   );
 
+  const sendimage = () => {
+    console.log("state", uplodeimage);
+  };
+  const onFormSubmit = (value) => {
+    // e.preventDefault();
+
+    console.log("imag", value);
+    const formData = new FormData();
+    formData.append("file", value.file);
+    // formData.append("phonenumber", phonenumber);
+    // formData.append("s3path", `${phonenumber}/`);
+  };
+
+  // const handleChange = async (e) => {
+  //   let myPromise = await new Promise((resolve, reject) => {
+  //     resolve({ file: e.target.files[0] });
+  //   });
+  //   onFormSubmit(myPromise);
+  // };
+
+  let lang = { l100: "hloo", l101: "dor" };
+  console.log(lang.l100);
   return (
     <div>
       {/* <div> */}
 
       <div>
         {typs ? (
-          <div>
-            <h1>יש'ך בעיה?</h1>
-            <p>תעדכן אותנו במה מדובר וכבר נתחיל את הטיפול</p>
-
-            {listtips.map((el) => {
-              return (
-                <div
-                  onClick={() => {
-                    chosentyp(el);
-                  }}
-                >
-                  {el.type}
+          <Problemcontener>
+            <img src="/images/man.png" className="avatar" alt="Image" />
+            <div className="icondisply">
+              <p id="hadep">יש'ך בעיה?</p>
+              <p>תעדכן אותנו במה מדובר וכבר נתחיל את הטיפול</p>
+              <div>
+                <div className="listofproblom">
+                  {listtips.map((el) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          chosentyp(el);
+                        }}
+                        className="uniqueproblem"
+                      >
+                        {el.type}
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            </div>
+          </Problemcontener>
         ) : (
           <FormContener>
-            <div className="avatar"></div>
+            {/* <div className="avatar"> */}
+            <img src="/images/man.png" className="avatar" alt="Image" />
+            {/* </div> */}
             {!uplodeimagescreen ? (
               <Form name="basic" onFinish={onFinish}>
                 <div className="goback">
@@ -158,8 +207,7 @@ const Nwerequest = (props) => {
                   />
                 </div>
                 <Form.Item
-                  label="סוג הבעיה"
-                  name="problom"
+                  name="subcategoryid"
                   rules={[
                     {
                       required: true,
@@ -176,15 +224,14 @@ const Nwerequest = (props) => {
                 </Form.Item>
 
                 <Form.Item
-                  name="location"
-                  label="בחר מתחם"
+                  name="locationid"
                   rules={[
                     {
                       required: true,
                     },
                   ]}
                 >
-                  <Select showSearch>
+                  <Select showSearch onChange={onChange}>
                     {locationarry.map((el) => {
                       return (
                         <Option value={[el.type, el.id]}>{el.type}</Option>
@@ -192,9 +239,26 @@ const Nwerequest = (props) => {
                     })}
                   </Select>
                 </Form.Item>
+                {selectromm ? (
+                  <Form.Item
+                    name="roomid"
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <Select showSearch placeholder="בחר חדר">
+                      {locationarry.map((el) => {
+                        return (
+                          <Option value={[el.type, el.id]}>{el.type}</Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                ) : null}
                 <Form.Item
-                  name="text"
-                  label="תיאור הבעיה"
+                  name="comments"
                   rules={[
                     {
                       required: true,
@@ -204,8 +268,7 @@ const Nwerequest = (props) => {
                   <TextArea rows={4} />
                 </Form.Item>
                 <Form.Item
-                  name="radio-group"
-                  label="דחיפות"
+                  name="urgencyid"
                   rules={[
                     {
                       required: true,

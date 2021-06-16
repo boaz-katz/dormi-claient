@@ -30,6 +30,7 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
+          <div>מופיע באימייל שנשלח למשתמש חדש במערכת</div>
         </Form.Item>
         <Form.Item
           name="email"
@@ -45,6 +46,7 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
+          <div>* מופיע באימייל שנשלח למשתמש חדש במערכת</div>
         </Form.Item>
         <Form.Item
           label="שפה"
@@ -60,6 +62,7 @@ function Setings() {
               return <Option value={[el.type, el.id]}>{el.type}</Option>;
             })}
           </Select>
+          <div>* ההגדרה האישית של המשתמש (אם ישנה) תגבר על הגדרה זו</div>
         </Form.Item>
         <Form.Item
           label="כתובת לעדכון פניות"
