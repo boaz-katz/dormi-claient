@@ -1,9 +1,10 @@
 import axios from "axios";
 const url = "http://b.dormi.co.il/users";
+const posturl = "http://b.dormi.co.il/boaz/";
 
 export const PostToServer = async (ruter, valeu) => {
   let myPromis = new Promise((resolve, reject) => {
-    axios.post(`http://b.dormi.co.il/boaz/post-read`, valeu).then(
+    axios.post(`posturl${ruter}`, valeu).then(
       (res) => {
         resolve(res.data);
       },

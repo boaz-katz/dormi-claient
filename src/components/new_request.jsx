@@ -19,6 +19,8 @@ import { FiArrowRight } from "react-icons/fi";
 import { BsCloudUpload } from "react-icons/bs";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { GettfromServer, PostToServer } from "../serveses";
+
+import { Arryoficons } from "../Icons";
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -40,9 +42,12 @@ const Nwerequest = (props) => {
   const [typs, settyps] = useState(true);
 
   useEffect(async () => {
+    let ruter = "post-read3";
     let res = await GettfromServer();
-
     console.log("newreqget", res);
+    let valeu = { name: "boaz", phonenumber: "5050505" };
+    let respost = await PostToServer(ruter, valeu);
+    console.log("respost", respost);
   }, []);
 
   const [selectromm, setselectromm] = useState(false);
@@ -51,9 +56,9 @@ const Nwerequest = (props) => {
   };
 
   const listtips = [
-    { type: "חשמל", id: 123 },
-    { type: "אינסטלציה", id: 456 },
-    { type: "שקר3", id: 789 },
+    { type: "חשמל", id: 1, icon: "HiOutlineDotsHorizontal" },
+    { type: "אינסטלציה", id: 2 },
+    { type: "שקר3", id: 3 },
     { type: "שקר2", id: 1011 },
     { type: "שקר1", id: 1213 },
   ];
@@ -161,8 +166,6 @@ const Nwerequest = (props) => {
   //   onFormSubmit(myPromise);
   // };
 
-  let lang = { l100: "hloo", l101: "dor" };
-  console.log(lang.l100);
   return (
     <div>
       {/* <div> */}
@@ -177,14 +180,30 @@ const Nwerequest = (props) => {
               <div>
                 <div className="listofproblom">
                   {listtips.map((el) => {
+                    let finicon = Arryoficons.find((ic) => {
+                      if (el.id === ic.iconid) {
+                        return ic;
+                      }
+                    });
+                    let icon;
+
+                    if (finicon?.icon) {
+                      icon = finicon.icon;
+                    } else {
+                      icon = false;
+                    }
+
                     return (
-                      <div
-                        onClick={() => {
-                          chosentyp(el);
-                        }}
-                        className="uniqueproblem"
-                      >
-                        {el.type}
+                      <div className="problome">
+                        <p
+                          onClick={() => {
+                            chosentyp(el);
+                          }}
+                          className="iconproblem"
+                        >
+                          {icon ? <finicon.icon /> : <PoweroffOutlined />}
+                        </p>
+                        <p className="uniqueproblem">{el.type}</p>
                       </div>
                     );
                   })}

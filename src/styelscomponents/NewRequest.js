@@ -19,13 +19,19 @@ export const Problemcontener = styled.div`
   .avatar {
     margin-top: 35px;
   }
-  .uniqueproblem:hover {
+
+  .uniqueproblem {
+    margin-inline-start: 23%;
+  }
+
+  .problome :hover {
     color: black;
   }
-  .uniqueproblem {
+
+  .iconproblem {
     border: 1px solid #fff;
     border-radius: 10px;
-    font-size: 11px;
+    font-size: 33px;
     height: 90px;
     line-height: 6px;
 

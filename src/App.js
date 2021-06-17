@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Helmet } from "react-helmet";
 import "./App.css";
 import Login from "./components/login";
 import ContrulScreen from "./components/ContrulScreen";
@@ -83,6 +83,11 @@ function App() {
   // const [Language, setLanguage] = useState("tlr");
   return (
     <div>
+      {/* <Helmet>
+                <meta charSet="utf-8" />
+                <title>My Title</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet> */}
       <DataProvider value={providerOptions}>
         {!loginstatus ? (
           <div>
