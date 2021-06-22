@@ -45,7 +45,7 @@ const Nwerequest = (props) => {
     let ruter = "post-read3";
     let res = await GettfromServer();
     console.log("newreqget", res);
-    let valeu = { name: "boaz", phonenumber: "5050505" };
+    let valeu = { name: "moshe", phonenumber: "1" };
     let respost = await PostToServer(ruter, valeu);
     console.log("respost", respost);
   }, []);

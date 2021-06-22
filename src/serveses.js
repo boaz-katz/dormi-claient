@@ -4,7 +4,7 @@ const posturl = "http://b.dormi.co.il/boaz/";
 
 export const PostToServer = async (ruter, valeu) => {
   let myPromis = new Promise((resolve, reject) => {
-    axios.post(`posturl${ruter}`, valeu).then(
+    axios.post(`http://b.dormi.co.il/boaz/post-read3`, valeu).then(
       (res) => {
         resolve(res.data);
       },
